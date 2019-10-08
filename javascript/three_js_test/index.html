@@ -13,35 +13,59 @@
     </style>
 </head>
 <body>
-<script src="js/three.js"></script>
-<script>
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+<div id="info">Description
+    <script src="js/three.js"></script>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
-    material.wireframe = true;
+        var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+        var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+        cubeMaterial.wireframe = true;
 
-    camera.position.z = 5;
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        scene.add(cube);
 
-    var animate = function () {
-        requestAnimationFrame(animate);
+        var sphereGeometry = new THREE.SphereGeometry(3);
+        var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        sphereMaterial.wireframe = true;
 
-        renderer.render(scene, camera);
-    };
+        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+        scene.add(sphere);
 
-    animate();
-</script>
+        var lineMaterial = new THREE.LineBasicMaterial({ color: 0xff00ff });
+
+        var lineGeometry = new THREE.Geometry();
+        lineGeometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+        lineGeometry.vertices.push(new THREE.Vector3(0, 10, 0));
+        lineGeometry.vertices.push(new THREE.Vector3(10, 0, 0));
+
+        var line = new THREE.Line(lineGeometry, lineMaterial);
+
+        scene.add(line);
+
+        camera.position.z = 50;
+
+        var animate = function () {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.40;
+            cube.rotation.y += 0.01;
+
+            sphere.translateX(0.1);
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</div>
 </body>
 </html>
