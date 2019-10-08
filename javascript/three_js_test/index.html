@@ -41,19 +41,20 @@
             return sphere;
         }
 
+        var speed = 0.05;
         var xSpeed = 0;
         var ySpeed = 0;
 
         function onDocumentKeyDown(event) {
             var keyCode = event.which;
             if (keyCode == 87) {
-                ySpeed = 0.1;
+                ySpeed += speed;
             } else if (keyCode == 83) {
-                ySpeed = -0.1;
+                ySpeed -= speed;
             } else if (keyCode == 65) {
-                xSpeed = -0.1;
+                xSpeed -= speed;
             } else if (keyCode == 68) {
-                xSpeed = 0.1;
+                xSpeed += speed;
             } else if (keyCode == 32) {
                 xSpeed = 0;
                 ySpeed = 0;
@@ -95,7 +96,14 @@
             cube.rotation.y += 0.01;
 
             sphere.translateX(xSpeed);
+            if (sphere.position.x > 50 || sphere.position.x < -50) {
+                xSpeed = 0;
+            }
+
             sphere.translateY(ySpeed);
+            if (sphere.position.y > 30 || sphere.position.y < -30) {
+                ySpeed = 0;
+            }
 
             renderer.render(scene, camera);
         };
