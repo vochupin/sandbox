@@ -17,6 +17,17 @@
 <div id="info">Description
     <script src="js/three.js"></script>
     <script>
+        function createCube() {
+            var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+            var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+
+            cubeMaterial.wireframe = true;
+
+            var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+            scene.add(cube);
+            return cube;
+        }
+
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -24,13 +35,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-        var cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-
-        cubeMaterial.wireframe = true;
-
-        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-        scene.add(cube);
+        var cube = createCube();
 
         var sphereGeometry = new THREE.SphereGeometry(3);
         var sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
@@ -65,6 +70,7 @@
         };
 
         animate();
+
     </script>
 </div>
 </body>
